@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Home | General Appointment Booking System{% endblock %}
+{% block content %}
+
+<div class="container">
+  <!-- Hero Section -->
+  <section class="hero-simple">
+    <h1>General Appointment <span class="primary-color">Booking System</span></h1>
+    <p class="hero-desc">
+      A simple and reliable way to schedule appointments across 3 categories.
+      All bookings use one shared booking logic and SQLite database.
+    </p>
+    <a href="/book" class="btn btn-primary btn-large">Book an Appointment Now &rarr;</a>
+  </section>
+
+  <!-- Category Cards -->
+  <section class="category-section">
+    <h2 class="section-heading">Select a Service Category</h2>
+    <div class="category-grid">
+      
+      <!-- Doctor Card -->
+      <div class="service-card doctor-card">
+        <div class="card-icon">🏥</div>
+        <h3>Doctor Appointment</h3>
+        <p class="card-subtitle">Consult experienced medical specialists.</p>
+        <ul class="service-item-list">
+          <li><strong>General Consultation</strong> &bull; Dr. A. Kumar (30 min)</li>
+          <li><strong>Dental Checkup</strong> &bull; Dr. S. Patel (45 min)</li>
+          <li><strong>Eye Examination</strong> &bull; Dr. R. Iyer (30 min)</li>
+        </ul>
+        <a href="/book?category=Doctor" class="btn btn-card">Book Doctor &rarr;</a>
+      </div>
+
+      <!-- Salon Card -->
+      <div class="service-card salon-card">
+        <div class="card-icon">💇</div>
+        <h3>Salon Appointment</h3>
+        <p class="card-subtitle">Professional haircut, styling &amp; grooming.</p>
+        <ul class="service-item-list">
+          <li><strong>Haircut</strong> &bull; Stylist Meena (30 min)</li>
+          <li><strong>Hair Styling</strong> &bull; Stylist Priya (60 min)</li>
+          <li><strong>Facial</strong> &bull; Stylist Kavya (45 min)</li>
+        </ul>
+        <a href="/book?category=Salon" class="btn btn-card">Book Salon &rarr;</a>
+      </div>
+
+      <!-- Vehicle Card -->
+      <div class="service-card vehicle-card">
+        <div class="card-icon">🔧</div>
+        <h3>Vehicle Service</h3>
+        <p class="card-subtitle">Certified automotive maintenance &amp; repair.</p>
+        <ul class="service-item-list">
+          <li><strong>Oil Change</strong> &bull; Tech. Ravi (45 min)</li>
+          <li><strong>General Maintenance</strong> &bull; Tech. Suresh (90 min)</li>
+          <li><strong>Tyre Rotation</strong> &bull; Tech. Anil (30 min)</li>
+        </ul>
+        <a href="/book?category=Vehicle%20Service" class="btn btn-card">Book Vehicle Service &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="steps-section">
+    <h2 class="section-heading">How Booking Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h4>Choose Service</h4>
+        <p>Pick Doctor, Salon, or Vehicle Service and choose your provider.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h4>Pick Date &amp; Slot</h4>
+        <p>Select your date. Available slots appear automatically in green.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h4>Instant Confirmation</h4>
+        <p>Enter your name and mobile number to receive your confirmed booking pass.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Appointment Booking System{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Top Demo Banner -->
+  <div class="top-banner">
+    ⚠️ <strong>Demo Workshop Project</strong> &bull; Shared Booking System for Doctor, Salon &amp; Vehicle Service
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <span class="brand-icon">📅</span>
+        <span class="brand-text">Appointment Booking</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/book" class="nav-link nav-btn">Book Appointment</a>
+        <a href="/my-bookings" class="nav-link">My Bookings</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p><strong>General Appointment Booking System</strong> &bull; College Workshop Presentation</p>
+      <p class="sub">Built with Python, Flask &amp; SQLite. Multi-category booking demonstration.</p>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

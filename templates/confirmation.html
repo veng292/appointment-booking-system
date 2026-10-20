@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Booking Confirmed | General Appointment Booking System{% endblock %}
+{% block content %}
+
+<div class="container container-sm">
+  <div class="confirmation-card">
+    <div class="success-icon">✅</div>
+    <h2>Booking Confirmed!</h2>
+    <p class="confirm-subtitle">Your appointment has been successfully scheduled and saved.</p>
+
+    <div class="receipt-box">
+      <div class="receipt-row">
+        <span class="label">Booking ID</span>
+        <span class="val highlight-id">#{{ booking.id }}</span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">Category</span>
+        <span class="val">{{ booking.category }}</span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">Service</span>
+        <span class="val"><strong>{{ booking.service_name }}</strong></span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">Provider</span>
+        <span class="val">{{ booking.provider }}</span>
+      </div>
+      <div class="receipt-row highlight-row">
+        <span class="label">Appointment Date</span>
+        <span class="val"><strong>{{ booking.appointment_date }}</strong></span>
+      </div>
+      <div class="receipt-row highlight-row">
+        <span class="label">Time Slot</span>
+        <span class="val time-val"><strong>{{ booking.appointment_time }}</strong></span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">Customer Name</span>
+        <span class="val">{{ booking.customer_name }}</span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">Contact Number</span>
+        <span class="val">{{ booking.contact_number }}</span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">Booked At</span>
+        <span class="val muted-val">{{ booking.created_at }}</span>
+      </div>
+    </div>
+
+    <div class="confirm-actions">
+      <a href="/book" class="btn btn-primary">+ Book Another Appointment</a>
+      <a href="/my-bookings?contact={{ booking.contact_number }}" class="btn btn-secondary">View My Bookings</a>
+      <a href="/" class="btn btn-outline">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

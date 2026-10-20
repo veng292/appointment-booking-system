@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Book Appointment | General Appointment Booking System{% endblock %}
+{% block content %}
+
+<div class="container container-sm">
+  <div class="form-wrapper">
+    <div class="form-header">
+      <h2>Book an Appointment</h2>
+      <p>Fill out the simple form below. Available slots update automatically.</p>
+    </div>
+
+    <form id="bookingForm" class="booking-form" novalidate>
+      
+      <!-- 1. Category -->
+      <div class="form-group">
+        <label for="category">1. Service Category <span class="required">*</span></label>
+        <select id="category" name="category" class="form-control" required>
+          <option value="">-- Choose Category --</option>
+          {% for cat_name in services.keys() %}
+          <option value="{{ cat_name }}" {% if cat_name == selected_category %}selected{% endif %}>
+            {{ cat_name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- 2. Service -->
+      <div class="form-group">
+        <label for="service_id">2. Service &amp; Provider <span class="required">*</span></label>
+        <select id="service_id" name="service_id" class="form-control" required>
+          <option value="">-- Choose Service --</option>
+          {% for cat_name, cat_data in services.items() %}
+            {% for svc in cat_data.services %}
+            <option value="{{ svc.id }}"
+              data-category="{{ cat_name }}"
+              data-name="{{ svc.name }}"
+              data-provider="{{ svc.provider }}"
+              data-duration="{{ svc.duration }}"
+              {% if svc.id == selected_service_id %}selected{% endif %}>
+              {{ cat_name }}: {{ svc.name }} &bull; {{ svc.provider }} ({{ svc.duration }})
+            </option>
+            {% endfor %}
+          {% endfor %}
+        </select>
+        <div id="serviceDetailsBox" class="info-callout hidden">
+          <span id="serviceDetailsText"></span>
+        </div>
+      </div>
+
+      <!-- 3. Appointment Date -->
+      <div class="form-group">
+        <label for="appointment_date">3. Appointment Date <span class="required">*</span></label>
+        <select id="appointment_date" name="appointment_date" class="form-control" required>
+          <option value="">-- Select Date --</option>
+          {% for d in available_dates %}
+          <option value="{{ d }}">{{ d }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- 4. Time Slot -->
+      <div class="form-group">
+        <label>4. Available Time Slots <span class="required">*</span></label>
+        
+        <!-- Legend -->
+        <div class="slot-legend-simple">
+          <span class="legend-badge legend-available">Available</span>
+          <span class="legend-badge legend-selected">Your Selection</span>
+          <span class="legend-badge legend-booked">Already Booked</span>
+        </div>
+
+        <!-- Hidden input for time slot -->
+        <input type="hidden" id="appointment_time" name="appointment_time" required />
+
+        <!-- Slots Container -->
+        <div id="slotsContainer" class="slots-box">
+          <p class="slots-helper-text">👉 Please select a Service and Date to view slots.</p>
+        </div>
+      </div>
+
+      <!-- 5. Customer Details -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="customer_name">5. Your Full Name <span class="required">*</span></label>
+          <input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="e.g. John Doe" required maxlength="100"/>
+        </div>
+
+        <div class="form-group">
+          <label for="contact_number">6. 10-Digit Mobile Number <span class="required">*</span></label>
+          <input type="tel" id="contact_number" name="contact_number" class="form-control" placeholder="e.g. 9876543210" required maxlength="10" pattern="[0-9]{10}"/>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div id="formError" class="alert alert-error hidden"></div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
+        Confirm Appointment Booking &rarr;
+      </button>
+
+      <p class="form-footer-note">
+        🔒 Duplicate booking protection is active. Once confirmed, this slot will be reserved for you.
+      </p>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/book.js') }}"></script>
+{% endblock %}

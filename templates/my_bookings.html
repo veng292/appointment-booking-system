@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}My Bookings | General Appointment Booking System{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="page-title-box">
+    <h2>Search My Bookings</h2>
+    <p>Enter your 10-digit mobile number to view all appointments you have booked.</p>
+  </div>
+
+  <div class="search-card">
+    <form method="GET" action="/my-bookings" class="search-form">
+      <input type="tel" name="contact" id="contact" placeholder="Enter 10-digit mobile number (e.g. 9876543210)"
+             value="{{ contact }}" maxlength="10" pattern="[0-9]{10}" required autofocus class="form-control" />
+      <button type="submit" class="btn btn-primary">Search Bookings</button>
+    </form>
+  </div>
+
+  {% if contact %}
+    {% if bookings %}
+    <div class="results-box">
+      <h3>Bookings for: <span class="primary-color">{{ contact }}</span> ({{ bookings|length }} found)</h3>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Category</th>
+              <th>Service</th>
+              <th>Provider</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Booked At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for b in bookings %}
+            <tr>
+              <td><strong>#{{ b.id }}</strong></td>
+              <td><span class="badge">{{ b.category }}</span></td>
+              <td><strong>{{ b.service_name }}</strong></td>
+              <td>{{ b.provider }}</td>
+              <td>{{ b.appointment_date }}</td>
+              <td><span class="badge-time">{{ b.appointment_time }}</span></td>
+              <td class="muted-text">{{ b.created_at }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <p>No bookings found for <strong>{{ contact }}</strong>.</p>
+      <a href="/book" class="btn btn-primary">Book an Appointment Now</a>
+    </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% endblock %}
